@@ -43,7 +43,7 @@ GEM
       json
       nokogiri
       pry
-    rack (2.0.5)
+    rack (2.2.2)
     rack-protection (2.0.4)
       rack
     rainbow (3.0.0)
