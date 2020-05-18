@@ -1,0 +1,9 @@
+development: &development
+  adapter: sqlite
+  database: db/imdb.db
+
+test: &test
+  <<: *development
+
+production: &production
+  <<: *test

@@ -1,0 +1,6 @@
+/api/.bundle
+/api/db/imdb.db
+/api/db/imdb.db-*
+/api/coverage/*
+
+/data

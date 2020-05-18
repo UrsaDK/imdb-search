@@ -1,0 +1,11 @@
+development: &development
+  static: false
+  public_folder: false
+  allow_origin: '*'
+
+test: &test
+  <<: *development
+  show_exceptions: false
+
+production: &production
+  <<: *test

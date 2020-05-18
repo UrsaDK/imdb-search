@@ -1,0 +1,26 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+
+gem 'rake'
+gem 'ruby-progressbar'
+gem 'sequel'
+gem 'sinatra'
+gem 'sinatra-contrib'
+gem 'sinatra-cors'
+gem 'sqlite3'
+
+# bundle --without development
+group :development do
+  gem 'pry', require: false             # An alternative IRB console
+  gem 'pry-bond', require: false        # Input completion in pry console
+  gem 'pry-byebug', require: false      # Adds step, next, finish, continue & break
+  gem 'pry-highlight', require: false   # Highlight and prettify output in console
+end
+
+# bundle --without tests
+group :tests do
+  gem 'rspec', require: false           # Code behaviour testing
+  gem 'rubocop', require: false         # Static code analyzer
+  gem 'simplecov', require: false       # Code coverage report generator
+end

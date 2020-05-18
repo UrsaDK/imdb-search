@@ -1,0 +1,65 @@
+# frozen_string_literal: true
+
+require File.expand_path('config/environment', __dir__)
+require_dir(PROJECT_ROOT) do |path, file|
+  %w[app tasks].include?(path[0]) \
+    && !file.start_with?('app/controller') \
+    && !file.start_with?('app/models')
+end
+
+require 'rubocop/rake_task'
+require 'rspec/core/rake_task'
+
+task default: 'start'
+
+desc 'Start Movie Search API server'
+task :start do
+  sh 'bundle exec rackup'
+end
+
+namespace :import do
+  desc 'Import TSV or TSV.GZ datafile into SQLite'
+  task :title_basics, [:datafile] do |_t, args|
+    args.with_defaults(
+      datafile: File.join(__dir__, '..', 'data', 'title.basics.tsv.gz')
+    )
+    Task::Import.title_basics(args.datafile)
+  end
+end
+
+namespace :db do
+  task migrate: 'migrate:all'
+  namespace :migrate do
+    desc 'Run all migrations in order'
+    task :all do
+      puts 'Applying database migrations ...'
+      Task::Migrate.all
+    end
+
+    desc 'Migrate to a specific version'
+    task :to, [:migration_number] do |_t, args|
+      Task::Migrate.to(args.migration_number)
+    end
+  end
+
+  desc 'Delete current database'
+  task :drop! do
+    db = File.expand_path(App::Datasource::Sequel.config['database'], __dir__)
+    puts "Deleting database: #{db}"
+    File.delete(db)
+  end
+
+  desc 'Create new database (destroys current db)'
+  task create!: ['db:drop!', 'db:migrate']
+end
+
+task test: ['test:rubocop', 'test:rspec']
+namespace :test do
+  desc 'Run code style test (rubocop)'
+  RuboCop::RakeTask.new(:rubocop)
+
+  desc 'Run BDD tests (rspec)'
+  RSpec::Core::RakeTask.new(:rspec) do |t|
+    t.pattern = 'spec/**/*_spec.rb'
+  end
+end

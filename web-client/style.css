@@ -1,0 +1,30 @@
+
+#container {
+  max-width: 576px;
+  margin: 0 auto;
+}
+
+input, select {
+  min-width: 100%;
+}
+
+#results {
+  margin-top: 2em;
+}
+
+.no-results {
+  text-align: center;
+}
+
+.loader:after {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    animation: ellipsis steps(4,end) 750ms infinite;
+    content: "•••";
+    width: 0px;
+}
+
+@keyframes ellipsis {
+    to { width: 1.5em; }
+}

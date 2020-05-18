@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Movie Search</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  </head>
+  <body>
+
+    <div class="container">
+      <h1>Movie Search</h1>
+
+      <form action="#" id="search_form" class="form-inline row">
+        <div class="form-group col-xs-8">
+          <label for="q" class="sr-only">Search string:</label>
+          <input name="q" id="q" placeholder="Title search" class="form-control" />
+        </div>
+        <div class="form-group col-xs-4">
+          <label for="c" class="sr-only">Search column:</label>
+          <select name="c" id="c" class="form-control">
+            <option value="originalTitle" selected>originalTitle</option>
+            <option value="primaryTitle">primaryTitle</option>
+          </select>
+        </div>
+        <button style="display: none">Search</button>
+      </form>
+
+      <table  id="results" class="table table-hover table-responsive">
+        <thead>
+          <tr>
+            <th>tconst</th>
+            <th>titleType</th>
+            <th>primaryTitle</th>
+            <th>originalTitle</th>
+            <th>startYear</th>
+            <th>endYear</th>
+            <th>runtimeMinutes</th>
+            <th>isAdult</th>
+            <th>genres</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="no-results" colspan="9">
+              Please enter a search query.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <script type="text/javascript" src="moviesearch.js"></script>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", new MovieSearch())
+    </script>
+
+  </body>
+</html>
